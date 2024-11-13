@@ -1,0 +1,143 @@
+// ॐ
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+#define ld long double
+#define pb push_back
+#define mp make_pair
+#define fr first
+#define sc second
+#define all(v) v.begin(), v.end()
+#define bac(v) v.rbegin(), v.rend()
+#define rep(i, a, b) for (ll i = a; i < b; ++i)
+#define endl '\n'
+#define precise(i) cout << fixed << setprecision(i)
+ll power(ll x, ll y)
+{
+    ll temp;
+    if (y == 0)
+        return 1;
+    temp = power(x, y / 2);
+    if (y % 2 == 0)
+        return temp * temp;
+    else
+        return x * temp * temp;
+}
+ll ncr(ll n, ll r)
+{
+    long long p = 1, k = 1;
+    if (n - r < r)
+        r = n - r;
+
+    if (r != 0)
+    {
+        while (r)
+        {
+            p *= n;
+            k *= r;
+            long long m = __gcd(p, k);
+            p /= m;
+            k /= m;
+            n--;
+            r--;
+        }
+    }
+    else
+    {
+        p = 1;
+    }
+    return p;
+}
+class book
+{
+    string title;
+    string author;
+    int isbn;
+
+public:
+    book()
+    {
+        title = "no title";
+        author = "no author";
+        isbn = 69;
+    }
+    book(string au, string ti, int is)
+    {
+        title = ti;
+        author = au;
+        isbn = is;
+    }
+    book(const book &b)
+    {
+        title = b.title;
+        author = b.author;
+        isbn = b.isbn;
+    }
+    string get_title()
+    {
+        return title;
+    }
+    string get_author()
+    {
+        return author;
+    }
+    int get_isbn()
+    {
+        return isbn;
+    }
+    void set_title(string s)
+    {
+        title = s;
+    }
+    void set_author(string s)
+    {
+        author = s;
+    }
+    void set_isbn(int in)
+    {
+        isbn = in;
+    }
+};
+class lib
+{
+public:
+    stack<book> st;
+    void add(book &b)
+    {
+        st.push(b);
+    }
+    void del()
+    {
+        st.pop();
+    }
+    void display()
+    {
+        book buk = st.top();
+        string ti = buk.get_title();
+        string au = buk.get_author();
+        int isb = buk.get_isbn();
+        cout << "Title: " << ti << ", ";
+        cout << "Author: " << au << ", ";
+        cout << "ISBN: " << isb << endl;
+    }
+};
+int main()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    book *b1 = new book("chusa", "Londa1", 4213);
+    book *b2 = new book("mpksoa", "Londa2", 902384);
+    book *b3 = new book("posop", "Londa3", 32299);
+    book *b4 = new book();
+    lib li;
+    li.add(*b1);
+    li.add(*b2);
+    li.del();
+    li.add(*b3);
+    li.display();
+    li.del();
+    li.display();
+    li.add(*b4);
+    li.display();
+    return 0;
+}
